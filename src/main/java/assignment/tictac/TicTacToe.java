@@ -10,10 +10,8 @@ public class TicTacToe
 {
     public static void main( String[] args )
     {
- 	public int size;
     	Logger l = Logger.getLogger("hi");
     	Scanner sc = new Scanner(System.in);
-    	PrintStream ps = new PrintStream(new FileOutputStream(FileDescriptor.out));
     	XoBoard xb = new XoBoard();
     	int position;
     	int s=xb.size;
