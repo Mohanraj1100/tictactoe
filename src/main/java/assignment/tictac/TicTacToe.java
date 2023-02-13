@@ -8,21 +8,19 @@ import java.util.logging.Logger;
 
 public class TicTacToe 
 {
-	static public int size;
     public static void main( String[] args )
     {
+ 	public int size;
     	Logger l = Logger.getLogger("hi");
     	Scanner sc = new Scanner(System.in);
     	PrintStream ps = new PrintStream(new FileOutputStream(FileDescriptor.out));
     	XoBoard xb = new XoBoard();
-    	//Playing pl = new Playing();
     	int position;
     	int s=xb.size;
     	int i=0;
     	xb.printArray();
     	l.info("Player 1  x");
     	l.info("Player 2  o");
-    	//char move = sc.next().charAt(0);
     	while(i<s*s)
     	{
     		if(i%2==0)
@@ -72,8 +70,10 @@ class XoBoard
 	static PrintStream ps = new PrintStream(new FileOutputStream(FileDescriptor.out));
 	Logger l = Logger.getLogger("hi");
 	Scanner is = new Scanner(System.in);
-	char xo[][];
+	char [][]xo;
 	int size;
+	String play1 = "Player 1 wins the Game";
+	String play2 = "Player 2 wins the Game";
 	XoBoard()
 	{
 		ps.print("Enter the size of game");
@@ -135,13 +135,13 @@ class XoBoard
 		}	
 		if(player1 == size)
 		{
-			l.info("Player 1 wins");
+			l.info(play1);
 			printArray();
 			System.exit(0);
 		}
 		if(player2 == size)
 		{
-			l.info("Player 2 wins");
+			l.info(play2);
 			printArray();
 			System.exit(0);
 		}
@@ -169,13 +169,13 @@ class XoBoard
 			}
 			if(player1 == size)
 			{
-				l.info("Player 1 wins");
+				l.info(play1);
 				printArray();
 				System.exit(0);
 			}
 			if(player2 == size)
 			{
-				l.info("Player 2 wins");
+				l.info(play2);
 				printArray();
 				System.exit(0);
 			}
@@ -203,13 +203,13 @@ class XoBoard
 			}
 			if(player1 == size)
 			{
-				l.info("Player 1 wins");
+				l.info(play1);
 				printArray();
 				System.exit(0);
 			}
 			if(player2 == size)
 			{
-				l.info("Player 2 wins");
+				l.info(play2);
 				printArray();
 				System.exit(0);
 			}
@@ -237,23 +237,18 @@ class XoBoard
 			}
 			if(player1 == size)
 			{
-				l.info("Player 1 wins");
+				l.info(play1);
 				printArray();
 				System.exit(0);
 			}
 			if(player2 == size)
 			{
-				l.info("Player 2 wins");
+				l.info(play2);
 				printArray();
 				System.exit(0);
 			}
 		}
 		
 		
-	}
-	public void draw()
-	{
-		l.info("Match has been Drawn");
-	}
-	
+	}	
 }
