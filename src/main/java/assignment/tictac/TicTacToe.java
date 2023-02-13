@@ -102,7 +102,6 @@ class XoBoard
 	}
 	public int insert(int posi,char m)
 	{
-		System.out.println(posi);
 		int row = (posi-1)/size;
 		int col = (posi-1)%size;
 		if(xo[row][col] == ' ' )
