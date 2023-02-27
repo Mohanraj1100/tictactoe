@@ -1,8 +1,4 @@
 package assignment.tictac;
-
-import java.io.FileDescriptor;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
