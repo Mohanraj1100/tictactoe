@@ -17,13 +17,11 @@ abstract class Check
 		if(play1 == size)
 		{
 			l.info("Player 1 wins");
-			//printArray();
 			System.exit(0);
 		}
 		if(play2 == size)
 		{
 			l.info("Player 2 wins");
-			//printArray();
 			System.exit(0);
 		}
 	}
