@@ -14,12 +14,12 @@ public class TicTacToe
     	Scanner sc = new Scanner(System.in);
     	XoBoard xb = new XoBoard();
     	int position;
-    	int s=xb.size;
+    	int size=xb.size;
     	int i=0;
     	xb.printArray();
     	l.info("Player 1  x");
     	l.info("Player 2  o");
-    	while(i<s*s)
+    	while(i<size*size)
     	{
     		if(i%2==0)
     		{
@@ -30,10 +30,7 @@ public class TicTacToe
     				i--;
     			}
     			xb.printArray();
-    			xb.checkXoLeadDiagonal();
-    			xb.checkXoDiagonal();
-    			xb.chechColumn();
-    			xb.chechRow();
+    			xb.checkConditon();
     		}
     		else
     		{
@@ -46,10 +43,7 @@ public class TicTacToe
     			else
     			{
     			xb.printArray();
-    			xb.checkXoLeadDiagonal();
-    			xb.checkXoDiagonal();
-    			xb.chechColumn();
-    			xb.chechRow();
+    			xb.checkConditon();
     			}
     		}
     		i++;
@@ -66,14 +60,16 @@ public class TicTacToe
 class XoBoard
 {
 	PrintStream ps = new PrintStream(new FileOutputStream(FileDescriptor.out));
-	Logger l = Logger.getLogger("hi");
+	Logger l = Logger.getLogger("XoBoard.class");
 	Scanner is = new Scanner(System.in);
 	char [][]xo;
 	int size;
+	Check ch;
 	XoBoard()
 	{
 		ps.print("Enter the size of game");
 		this.size = is.nextInt();
+		
 		xo=new char[size][size];
 		for(int i=0;i<size;i++)
 		{
@@ -112,7 +108,54 @@ class XoBoard
 		return 0;
 	}
 	
-	public void checkXoLeadDiagonal()
+	void checkConditon()
+	{
+		ch = new CheckLeadingDiagonal(size,xo);
+		ch.condition();
+		ch = new CheckDiagonal(size,xo);
+		ch.condition();
+		ch = new CheckRow(size,xo);
+		ch.condition();
+		ch = new CheckColoumn(size,xo);
+		ch.condition();
+	}
+	
+}
+
+abstract class Check
+{
+	Logger l = Logger.getLogger("hi");
+	int size;
+	char [][]xo;
+	Check(int size,char[][] xo)
+	{
+		this.size = size;
+		this.xo = xo;
+	}
+	public void check(int play1,int play2)
+	{
+		if(play1 == size)
+		{
+			l.info("Player 1 wins");
+			//printArray();
+			System.exit(0);
+		}
+		if(play2 == size)
+		{
+			l.info("Player 2 wins");
+			//printArray();
+			System.exit(0);
+		}
+	}
+	public abstract void condition();
+}
+class CheckLeadingDiagonal extends Check{
+	CheckLeadingDiagonal(int size,char[][] xo)
+	{
+		super(size,xo);
+	}
+	
+	public void condition()
 	{
 		int player1=0;
 		int player2=0;
@@ -130,7 +173,16 @@ class XoBoard
 		}	
 		check(player1,player2);
 	}
-	public void checkXoDiagonal()
+}
+
+class CheckDiagonal extends Check
+{
+	CheckDiagonal(int size,char[][] xo)
+	{
+		super(size,xo);
+	}
+	
+	public void condition()
 	{
 		
 		for(int i=0;i<size;i++)
@@ -156,30 +208,17 @@ class XoBoard
 		
 		
 	}
-	public void chechColumn()
+	
+}
+
+class CheckRow extends Check
+{
+	CheckRow(int size,char[][] xo)
 	{
-		
-		for(int i=0;i<size;i++)
-		{
-			int player1=0;
-			int player2=0;
-			for(int j=0;j<size;j++)
-			{
-				if(xo[j][i]=='x')
-				{
-					player1++;
-				}
-				else if(xo[j][i]=='o')
-				{
-					player2++;
-				}
-			}
-			check(player1,player2);
-		}
-		
-		
+		super(size,xo);
 	}
-	public void chechRow()
+	
+	public void condition()
 	{
 		for(int i=0;i<size;i++)
 		{
@@ -202,20 +241,36 @@ class XoBoard
 		
 		
 	}
-	public void check(int play1,int play2)
+}
+
+class CheckColoumn extends Check
+{
+	CheckColoumn(int size,char[][] xo)
 	{
-		if(play1 == size)
-		{
-			l.info("Player 1 wins");
-			printArray();
-			System.exit(0);
-		}
-		if(play2 == size)
-		{
-			l.info("Player 2 wins");
-			printArray();
-			System.exit(0);
-		}
+		super(size,xo);
 	}
 	
+	public void condition()
+	{
+		
+		for(int i=0;i<size;i++)
+		{
+			int player1=0;
+			int player2=0;
+			for(int j=0;j<size;j++)
+			{
+				if(xo[j][i]=='x')
+				{
+					player1++;
+				}
+				else if(xo[j][i]=='o')
+				{
+					player2++;
+				}
+			}
+			check(player1,player2);
+		}
+		
+		
+	}
 }
