@@ -12,22 +12,23 @@ class XoBoard
 	Logger l = Logger.getLogger("XoBoard.class");
 	Scanner is = new Scanner(System.in);
 	char [][]xo;
-	int size;
+	int s;
 	Check ch;
 	XoBoard()
 	{
 		ps.print("Enter the size of game");
-		this.size = is.nextInt();
+		s= is.nextInt();
 		
-		xo=new char[size][size];
-		for(int i=0;i<size;i++)
+		xo=new char[s][s];
+		for(int i=0;i<s;i++)
 		{
-			for(int j=0;j<size;j++)
+			for(int j=0;j<s;j++)
 				{
 					xo[i][j]=' ';
 				}
 		}
 	}
+	static int size = s;
 	void printArray()
 	{
 	for(int i=0;i<size;i++)
